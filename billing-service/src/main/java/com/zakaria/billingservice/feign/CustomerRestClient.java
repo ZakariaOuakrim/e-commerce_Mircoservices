@@ -2,10 +2,15 @@ package com.zakaria.billingservice.feign;
 
 import com.zakaria.billingservice.model.Customer;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "customer-service")
 public interface CustomerRestClient  {
     @GetMapping("/api/customers/{id}")
-    public Customer findCustomerById(Long id);
+     Customer getCustomerById(@PathVariable Long id);
+
+    @GetMapping("/api/customers")
+    PagedModel<Customer> getAllCustomer();
 }
